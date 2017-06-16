@@ -30,5 +30,6 @@ int main(int argc, char** argv)
   }
   detect::Detector d(argv[1]);*/
 
+  SDL_Delay(5000);
   return 0;
 }
