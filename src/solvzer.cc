@@ -5,6 +5,7 @@
 #include <detect/detector.hh>
 #include <misc/display.hh>
 #include <misc/controller.hh>
+#include <misc/state.hh>
 
 #define DRAW
 int main(int argc, char** argv)
@@ -14,16 +15,17 @@ int main(int argc, char** argv)
   SDL_Event event;
 
   auto& dis = display::Display::Instance(&window, &renderer);
-  //display.draw_rubiks(cube::Cube::solved_state_);
+  auto face = cube::Face(cube::Cube::solved_state_);
+  state::State::Instance().face_set(face);
   dis.setup_background();
+  dis.draw_rubiks(state::State::Instance().face_str_get());
   dis.setup_ui();
   dis.refresh();
   controller::start_controller(&event);
   return 0;
   cube::Search search;
 
-
-  auto face = cube::Face(cube::Cube::solved_state_);
+  /*auto face = cube::Face(cube::Cube::solved_state_);
   std::cout << face << std::endl;
 
   //std::string moves =
@@ -33,7 +35,7 @@ int main(int argc, char** argv)
   auto sol = search.solution(face, cube::Search::DEPTH);
   assert(search.ack_solution(face, sol));
 
-  /*if (argc != 2)
+  if (argc != 2)
   {
     std::cout << "Usage: ./solvzer path_to_cube" << std::endl;
     return 1;
