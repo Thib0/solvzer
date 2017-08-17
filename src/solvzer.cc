@@ -7,7 +7,6 @@
 #include <misc/controller.hh>
 #include <misc/state.hh>
 
-#define DRAW
 int main(int argc, char** argv)
 {
   SDL_Window *window = nullptr;
@@ -17,7 +16,6 @@ int main(int argc, char** argv)
   auto& dis = display::Display::Instance(&window, &renderer);
   auto face = cube::Face(cube::Cube::solved_state_);
   state::State::Instance().face_set(face);
-  dis.set_window_icon();
   dis.repaint();
   controller::start_controller(&event);
   return 0;
